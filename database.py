@@ -10,9 +10,9 @@ Connect to the database using the connection string
 '''
 def openConnection():
     # connection parameters - ENTER YOUR LOGIN AND PASSWORD HERE
-    userid = "postgres"
-    passwd = "zhy2000418"
-    myHost = "localhost"
+    userid = "COMP9120_test"
+    passwd = "COMP9120_test"
+    myHost = "120.48.94.214"
 
     # Create a connection to the database
     conn = None
@@ -33,7 +33,12 @@ Validate administrator based on login and password
 '''
 def checkAdmCredentials(login, password):
 
-    return ['daegis', 'adm222', 'Derien', 'Aegis', 'derien.aegis@yahoomail.com', 95700.15]
+    cur = openConnection().cursor()
+    cur.execute(f"SELECT * from administrator WHERE login = '{login}'")
+    row = cur.fetchall()
+    data = row[0]
+    if password == data[1]:
+        return data
 
 
 '''
